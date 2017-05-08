@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title> CRUD APP </title>
+  <link rel="stylesheet" type="text/css" href="crud.css">
+  <style>
+    input[type='submit'], button, [aria-label]{
+      cursor: pointer;
+    }
+    #spoiler{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<h1>Crud App Robots </h1>
+<div class="container">
+<form action="javascript:void(0);" method="POST" onsubmit="app.Add()"> 
+  <input type="text" id="add-name" placeholder="New Name">
+  <input type="text" id="add-description" placeholder="Description">
+  <input class="add" type="submit" value="Add">
+</form>
+
+<div id="spoiler" role="aria-hidden">
+  <form action="javascript:void(0);" method="POST" id="saveEdit">
+    <input type="text" id="edit-name">
+    <input type="text" id="edit-description">
+    <input type="submit" value="Edit" /> <a onclick="CloseInput()" aria-label="Close">&#10006;</a>
+  </form>
+</div>
+
+<p id="counter"></p>
+
+<table>
+  <tr>
+    <th class="name">Name</th>
+    <th class="des">Description</th>
+  </tr>
+    <tbody id="robots"></tbody> 
+    <tbody id="des"></tbody>
+</table>
+
+</div>
+
+<script>
+var app = new function() {
+
+  this.el = document.getElementById('robots');
+  this.al = document.getElementById('des');
+
+  this.robots = ['ROBOT1', 'ROBOT2', 'ROBOT3', 'ROBOT4', 'ROBOT5', 'ROBOT6'];
+  this.des = ['UKNOWN USES', 'PASSES THE LOW', 'FROM MICHIGAN', 'WHO CARES', 'BLAA BLAA', 'KAKAKAKA'];
+
+  this.Count = function(data) {
+    var el   = document.getElementById('counter');
+    var name = 'robot';
+
+    if (data) {
+      if (data > 1) {
+        name = 'robots';
+      }
+      el.innerHTML = data + ' ' + name ;
+    } else {
+      el.innerHTML = 'No ' + name;
+    }
+  };
+  
+  this.FetchAll = function() {
+    var data = '';
+
+    if (this.robots.length > 0) {
+      for (i = 0; i < this.robots.length; i++) {
+        data += '<tr>';
+        data += '<td>' + this.robots[i] + '</td>';
+        data += '<td>' + this.des[i] + '</td>';
+        data += '<td><button onclick="app.Edit(' + i + ')">Edit</button></td>';
+        data += '<td><button onclick="app.Delete(' + i + ')">Delete</button></td>';
+        data += '</tr>';
+      }
+    }
+
+    this.Count(this.robots.length);
+    return this.el.innerHTML = data;
+  };
+
+
+  this.Add = function () {
+    el = document.getElementById('add-name');
+    al = document.getElementById('add-description');
+    // Get the value
+    var name = el.value;
+    var description = al.value
+
+    if (name && description) {
+      // Add the new value
+      this.robots.push(name.trim());
+      this.des.push(description.trim());
+      // Reset input value
+      el.value = '';
+      al.value = '';
+      // Dislay the new list
+      this.FetchAll();
+    }
+  };
+
+
+  this.Edit = function (item) {
+    var el = document.getElementById('edit-name');
+    var al = document.getElementById('edit-description');
+    // Display value in the field
+    el.value = this.robots[item];
+    al.value = this.des[item];
+    // Display fields
+    document.getElementById('spoiler').style.display = 'block';
+    self = this;
+
+    document.getElementById('saveEdit').onsubmit = function() {
+      // Get value
+      var robot = el.value;
+      var dess = al.value;
+
+      if (robot && des) {
+        // Edit value
+        self.robots.splice(item, 1, robot.trim());
+        self.des.splice(item, 1, dess.trim());
+        // Display the new list
+        self.FetchAll();
+        // Hide fields
+        CloseInput();
+      }
+    }
+  };
+
+  this.Delete = function (item) {
+    // Delete the current row
+    this.robots.splice(item, 1);
+    this.des.splice(item, 1);
+    // Display the new list
+    this.FetchAll();
+  };
+  
+}
+
+app.FetchAll();
+
+function CloseInput() {
+  document.getElementById('spoiler').style.display = 'none';
+}
+</script>
+</body>
+</html>

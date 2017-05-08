@@ -1,0 +1,79 @@
+body{
+	
+	margin-top: 100px;
+	max-width: 100%;
+}
+#add-name{
+	width: 150px;
+	height:20px;
+	border: none;
+	border-bottom: 1px solid black;
+	font-family: big john;
+	font-size: 15px;
+	padding-left: 40px;
+	outline: none;
+	background-color:#FFF8DC;
+	
+}
+
+#add-description{
+	width: 150px;
+	height:20px;
+	border: none;
+	border-bottom: 1px solid black;
+	font-family: big john;
+	font-size: 15px;
+	padding-left: 40px;
+	outline: none;
+	background-color:#FFF8DC;
+}
+.add {
+	width: 100px;
+	border: 2px solid black;
+	border-radius: 5px;
+	outline:none;
+	background-color: gray;
+	font-family: big john;
+	color:white;
+}
+table {
+	font-family: big john;
+
+}
+.name{
+	font-family: big john;
+	font-size: 20px;
+	font-weight: lighter;
+	padding-bottom:20px;
+	padding-right: 100px;
+	
+}
+.des {
+	font-family: big john;
+	font-size: 20px;
+	font-weight: lighter;
+	padding-bottom:20px;
+	
+}
+button {
+	width: 100px;
+	border: 2px solid black;
+	border-radius: 5px;
+	outline:none;
+	background-color: gray;
+	font-family: big john;
+	color:white;
+}
+.container {
+	border: 3px solid black;
+	padding-left: 230px;
+	padding-top:50px;
+	padding-bottom:50px;
+	margin-right:100px;
+	margin-left:100px;
+	background-color:#FFF8DC;
+}
+h1 {
+	font-family: big john;
+	text-align: center;
+}
